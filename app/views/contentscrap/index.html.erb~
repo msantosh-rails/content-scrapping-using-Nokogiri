@@ -1,0 +1,32 @@
+<html>
+<head>
+<style>
+input[type="text"]
+{
+	border-radius:25px;
+}
+</style>
+</head>
+<body>
+<h1 style="text-align:center">Content Scrapping</h1>
+
+<div class="well">
+<%= form_for :contentscrap, :url => url_for(:controller => 'contentscrap',:action => 'index'),  :html => {method: :post, class: 'form-horizontal'} do |f| %>	
+
+
+  <div class="form-inputs " style="float:left">
+
+<%= f.text_field :search %> &nbsp; 
+  </div>
+
+  <div class="">
+    <%= f.submit "Search" ,class: 'btn btn-primary'%>
+  </div>
+
+
+<%end%> 
+</div>
+
+<%= render :partial => "result" %>
+</body>
+</html>	

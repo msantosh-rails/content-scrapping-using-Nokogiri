@@ -1,0 +1,29 @@
+require 'mechanize'
+require 'open-uri'
+require 'nokogiri'
+
+class ContentscrapController < ApplicationController
+
+  def index
+  
+  	agent = Mechanize.new
+  	page = agent.get('http://google.com/')
+=begin
+  	page.links.each do |link|
+	  puts link.text
+=end
+	google_form = page.form('f')
+
+	unless params[:contentscrap].blank?
+		google_form.q = params[:contentscrap][:search]
+		@page = agent.submit(google_form, google_form.buttons.first)
+		
+		content =  @page.body
+		page = Nokogiri::HTML content
+		result = page.search('div[@id="resultStats"]').inner_text	
+
+		puts result.to_s.gsub("About","").gsub("results","").gsub("result","").gsub(",","").strip	
+
+	end
+  end
+end

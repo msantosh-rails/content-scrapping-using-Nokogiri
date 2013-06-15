@@ -1,0 +1,14 @@
+<% unless @page.blank? %>
+<table class="table table-striped">
+<thead>
+<th> Content From "Google Search" :</th>
+</thead>
+<%@page.search('//h3/a').each do |node| %>
+<tr>
+<td><%= node.content %></td>
+</tr>
+<%end%>
+</table>
+<%end%>
+
+
